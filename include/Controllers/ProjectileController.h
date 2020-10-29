@@ -1,16 +1,17 @@
 #pragma once
 
-#include "Projectiles/ProjectileBase.h"
 #include "Factories/ProjectileFactory.h"
 #include "Controllers/ControllerBase.h"
 #include "Controllers/EnemyController.h"
 #include "Controllers/TileController.h"
 #include <vector>
 
+class ProjectileBase;
+
 class ProjectileController : public ControllerBase
 {
 public:
-	explicit ProjectileController(EnemyController* eC, TileController* tC);
+	explicit ProjectileController(EnemyController& eC, TileController& tC, ProjectileFactory& pF);
 	~ProjectileController();
 
 	void Start() override;
@@ -26,6 +27,6 @@ private:
 
 	EnemyController& enemyController;
 	TileController& tileController;
-	ProjectileFactory* projectileFactory = nullptr; 
+	ProjectileFactory& projectileFactory;
 	std::vector<ProjectileBase*> activeProjectiles;
 };

@@ -7,7 +7,7 @@
 class EnemyViewController
 {
 public:
-	explicit EnemyViewController(SDL_Renderer* renderer, EnemyController* enemyController);
+	explicit EnemyViewController(SDL_Renderer& rend, EnemyController& enemyController);
 	~EnemyViewController();
 
 	void Start();

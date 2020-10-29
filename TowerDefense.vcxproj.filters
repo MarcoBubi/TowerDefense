@@ -79,6 +79,12 @@
     <Filter Include="Source Files\Player">
       <UniqueIdentifier>{522403be-e315-4d2e-b75f-9824a2ebd5a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\PathFinding">
+      <UniqueIdentifier>{493463af-ece0-46b0-a125-d4434582f875}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PathFinding">
+      <UniqueIdentifier>{9cd5e60e-771e-4c75-91c3-8f6f0ea56a91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -183,6 +189,12 @@
     <ClCompile Include="src\Controllers\ControllerBase.cpp">
       <Filter>Source Files\Controllers</Filter>
     </ClCompile>
+    <ClCompile Include="src\PathFinding\PathFinding.cpp">
+      <Filter>Source Files\PathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathFinding\PathNode.cpp">
+      <Filter>Source Files\PathFinding</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Game.h">
@@ -283,6 +295,12 @@
     </ClInclude>
     <ClInclude Include="include\Controllers\ControllerBase.h">
       <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PathFinding\PathFinding.h">
+      <Filter>Header Files\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PathFinding\PathNode.h">
+      <Filter>Header Files\PathFinding</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

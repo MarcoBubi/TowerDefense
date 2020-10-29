@@ -16,6 +16,7 @@ public:
 	TileType tileType;
 
 	TileData(std::string tileString);
+
 private:
 	TileData::TileType GetTileTypeFromString(std::string tileString);
 

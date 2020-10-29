@@ -2,11 +2,11 @@
 
 #include "Controllers/TowerController.h"
 
-TowerController::TowerController(EnemyController* eC, ProjectileController* pC, TileController* tC) :
-	enemyController(*eC),
-	projectileController(*pC),
-	tileController(*tC),
-	towerFactory(new TowerFactory()),
+TowerController::TowerController(EnemyController& eC, ProjectileController& pC, TileController& tC, TowerFactory& tF) :
+	enemyController(eC),
+	projectileController(pC),
+	tileController(tC),
+	towerFactory(tF),
 	selectedTower(TowerBase::TowerType::Fast)
 {
 
@@ -14,7 +14,7 @@ TowerController::TowerController(EnemyController* eC, ProjectileController* pC, 
 
 TowerController::~TowerController()
 {
-	towerFactory = nullptr;
+
 }
 
 void TowerController::Start()
@@ -37,7 +37,7 @@ void TowerController::TryAddTower(int posX, int posY)
 {
 	if (CanSpawnOnTargetLocation(posX, posY))
 	{
-		activeTowers.push_back(towerFactory->CreateTower(selectedTower, &enemyController, &projectileController, posX, posY));
+		activeTowers.push_back(towerFactory.CreateTower(selectedTower, &enemyController, &projectileController, posX, posY));
 	}	
 }
 

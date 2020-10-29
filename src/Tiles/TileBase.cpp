@@ -15,6 +15,19 @@ TileBase::~TileBase()
 
 }
 
+void TileBase::SetPath(bool value)
+{
+	if (passable)
+	{
+		pathTile = true;
+	}
+}
+
+bool TileBase::IsPath()
+{
+	return pathTile;
+}
+
 bool TileBase::IsPassable()
 {
 	return passable;

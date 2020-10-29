@@ -1,12 +1,13 @@
 #pragma once
 
+#include "Controllers/TileController.h"
 #include "Data/EnemyData.h"
 #include "Enemy/EnemyBase.h"
 
 class SlowEnemy : public EnemyBase
 {
 public:
-	SlowEnemy(EnemyData::EnemyType type, float time);
+	SlowEnemy(EnemyData::EnemyType type, float time, TileController& tC);
 	~SlowEnemy();
 
 private:

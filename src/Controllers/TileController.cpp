@@ -2,15 +2,16 @@
 
 #include "Controllers/TileController.h"
 #include "Constants/Constants.h"
+#include "Data/TileData.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-TileController::TileController(int screenHeight, int screenWidth) : 
+TileController::TileController(int screenHeight, int screenWidth, TileFactory& tF) : 
 	horizontalTiles(screenHeight / Constants::TILE_SIZE),
 	verticalTiles(screenWidth / Constants::TILE_SIZE),
-	tileFactory(new TileFactory())
+	tileFactory(tF)
 {
 	srand(time(NULL)); // Don't feel like implementing a better solution atm.
 
@@ -60,7 +61,7 @@ void TileController::CreateTiles(std::vector<TileData*> tilesData)
 	{
 		for (int horz = 0; horz < horizontalTiles; ++horz)
 		{
-			TileBase* tile = tileFactory->CreateTile(tilesData[tileIndex]->tileType, tileX, tileY);
+			TileBase* tile = tileFactory.CreateTile(tilesData[tileIndex]->tileType, tileX, tileY);
 			tiles[tileIndex] = tile;
 			TileData::TileType tileType = tilesData[tileIndex]->tileType;
 
@@ -83,20 +84,52 @@ void TileController::CreateTiles(std::vector<TileData*> tilesData)
 	}
 }
 
-TileBase* TileController::GetTileAtPosition(int positionX, int positionY)
+int TileController::GetTilePosition(int position)
+{
+	return (position / Constants::TILE_SIZE);
+}
+
+TileBase* TileController::GetTileAtPosition(int positionX, int positionY) const
 {
 	int coordinateX = GetCoordinateFor(positionX, Constants::GAME_FIELD_OFFSET_X);
 	int coordinateY = GetCoordinateFor(positionY, Constants::GAME_FIELD_OFFSET_Y);
 
-	return tiles[GetTileIndexForPosition(coordinateX, coordinateY)];
+	return GetTileAtIndex(GetTileIndexForPosition(coordinateX, coordinateY));
 }
 
-bool TileController::IsPositionOutOfBound(int positionX, int positionY)
+TileBase* TileController::GetTileAtIndex(int index) const
+{
+	if (index >= 0 && index < GetNumberOfTiles())
+	{
+		return tiles[index];
+	}
+
+	return nullptr;
+}
+
+int TileController::GetIndexForTile(TileBase* tile) const
+{
+	return GetIndexForPosition(tile->GetPositionX(), tile->GetPositionY());
+}
+
+int TileController::GetIndexForPosition(int x, int y) const
+{
+	int coordinateX = GetCoordinateFor(x, Constants::GAME_FIELD_OFFSET_X);
+	int coordinateY = GetCoordinateFor(y, Constants::GAME_FIELD_OFFSET_Y);
+	return GetTileIndexForPosition(coordinateX, coordinateY);
+}
+
+bool TileController::IsPositionOutOfBound(int positionX, int positionY) const
 {
 	return GetTileAtPosition(positionX, positionY) == nullptr;
 }
 
-std::vector<TileBase*> TileController::GetSpawnPoints()
+int TileController::GetNumberOfTiles() const
+{
+	return horizontalTiles * verticalTiles;;
+}
+
+std::vector<TileBase*> TileController::GetSpawnPoints() const
 {
 	return spawnPoints;
 }
@@ -110,17 +143,26 @@ TileBase& TileController::GetRandomSpawnPoint()
 	return *spawnPoints[index];
 }
 
-std::vector<TileBase*> TileController::GetPlayerPoints()
+TileBase& TileController::GetRandomPlayerPoint()
+{
+	int spawnPointsSize = playerPoints.size();
+
+	int index = rand() % spawnPointsSize;
+
+	return *playerPoints[index];
+}
+
+std::vector<TileBase*> TileController::GetPlayerPoints() const
 {
 	return playerPoints;
 }
 
-int TileController::GetCoordinateFor(int value, int offSet)
+int TileController::GetCoordinateFor(int value, int offSet) const
 {
 	return  (offSet + value) / Constants::TILE_SIZE;
 }
 
-int TileController::GetTileIndexForPosition(int x, int y)
+int TileController::GetTileIndexForPosition(int x, int y) const
 {
 	return x + (y * horizontalTiles);
 }

@@ -11,7 +11,10 @@ Game::~Game()
 {
 	window = nullptr;
 	renderer = nullptr;
+
+	delete gameController;
 	gameController = nullptr;
+	delete viewController;
 	viewController = nullptr;
 
 	SDL_DestroyWindow(window);
@@ -38,7 +41,7 @@ void Game::Init()
 
 	gameController = new GameController(SCREEN_HEIGHT, SCREEN_WIDTH);
 	gameController->Start();
-	viewController = new ViewController(renderer, gameController);
+	viewController = new ViewController(*renderer, *gameController);
 	viewController->Start();
 }
 

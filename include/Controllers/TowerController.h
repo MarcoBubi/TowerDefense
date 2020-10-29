@@ -11,7 +11,7 @@
 class TowerController : public ControllerBase
 {
 public:
-	TowerController(EnemyController* eC, ProjectileController* pC, TileController* tC);
+	TowerController(EnemyController& eC, ProjectileController& pC, TileController& tC, TowerFactory& tF);
 	~TowerController();
 
 	void Start() override;
@@ -28,6 +28,6 @@ private:
 	EnemyController& enemyController;
 	ProjectileController& projectileController;
 	TowerBase::TowerType selectedTower;
-	TowerFactory* towerFactory = nullptr;
+	TowerFactory& towerFactory;
 	std::vector<TowerBase*> activeTowers;
 };

@@ -8,7 +8,7 @@
 class ViewController : public ControllerBase// This should be moved in the Views folder
 {
 public:
-	explicit ViewController(SDL_Renderer* renderer, GameController* gc);
+	explicit ViewController(SDL_Renderer& rend, GameController& gC);
 
 	void Start() override;
 	void Update(float deltaTime) override;

@@ -172,6 +172,8 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Loaders\DataLoader.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\PathFinding\PathFinding.cpp" />
+    <ClCompile Include="src\PathFinding\PathNode.cpp" />
     <ClCompile Include="src\Player\Player.cpp" />
     <ClCompile Include="src\Projectiles\NormalProjectile.cpp" />
     <ClCompile Include="src\Projectiles\ProjectileBase.cpp" />
@@ -207,6 +209,8 @@
     <ClInclude Include="include\Factories\TowerFactory.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Loaders\DataLoader.h" />
+    <ClInclude Include="include\PathFinding\PathFinding.h" />
+    <ClInclude Include="include\PathFinding\PathNode.h" />
     <ClInclude Include="include\Player\Player.h" />
     <ClInclude Include="include\Projectiles\NormalProjectile.h" />
     <ClInclude Include="include\Projectiles\ProjectileBase.h" />

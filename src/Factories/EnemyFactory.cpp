@@ -3,15 +3,15 @@
 #include "Enemy/FastEnemy.h"
 #include "Enemy/SlowEnemy.h"
 
-EnemyBase* EnemyFactory::CreateEnemy(EnemyData::EnemyType type, float time)
+EnemyBase* EnemyFactory::CreateEnemy(EnemyData::EnemyType type, float time, TileController& tC)
 {
 	switch (type)
 	{
 	case EnemyData::EnemyType::Fast:
-		return new FastEnemy(type, time);
+		return new FastEnemy(type, time, tC);
 		break;
 	case EnemyData::EnemyType::Slow:
-		return new SlowEnemy(type, time);
+		return new SlowEnemy(type, time, tC);
 		break;
 	default:
 		return nullptr;

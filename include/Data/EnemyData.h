@@ -6,7 +6,6 @@ struct EnemyData
 	{
 		Fast = 1,
 		Slow = 2
-
 	};
 
 	EnemyType enemyType;

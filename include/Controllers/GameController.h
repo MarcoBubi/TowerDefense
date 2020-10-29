@@ -9,6 +9,11 @@
 #include "Player/Player.h"
 #include <vector>
 
+class EnemyFactory;
+class ProjectileFactory;
+class TileFactory;
+class TowerFactory;
+
 class GameController : public ControllerBase
 {
 public:
@@ -29,6 +34,7 @@ public:
 	void ToggleBuildingMode();
 
 private:
+	void InitFactories();
 	bool EndOfGameReached();
 
 	int screenH;
@@ -38,6 +44,10 @@ private:
 	TowerController* towerController = nullptr;
 	EnemyController* enemyController = nullptr;
 	TileController* tileController = nullptr;
+	EnemyFactory* enemyFactory = nullptr;
+	ProjectileFactory* projectileFactory = nullptr;
+	TileFactory* tileFactory = nullptr;
+	TowerFactory* towerFactory = nullptr;
 	DataLoader* dataLoader = nullptr;
-	Player* player;
+	Player* player = nullptr;
 };

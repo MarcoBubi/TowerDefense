@@ -1,20 +1,19 @@
 #pragma once
 
 #include "Controllers/EnemyController.h"
+#include "Data/EnemyData.h"
 #include "Enemy/EnemyBase.h"
 #include <iostream>
 
-EnemyController::EnemyController(TileController* tC) :
-	tileController(*tC),
-	enemyFactory(new EnemyFactory())
+EnemyController::EnemyController(TileController& tC, EnemyFactory& eF) :
+	tileController(tC),
+	enemyFactory(eF)
 {
 
 }
 
 EnemyController::~EnemyController()
 {
-	delete enemyFactory;
-	enemyFactory = nullptr;
 	allEnemies.clear();
 	spawnedEnemies.clear();
 }
@@ -30,7 +29,7 @@ void EnemyController::Update(float deltaTime)
 	TrySpawnEnemies();
 	for (auto& enemy : spawnedEnemies)
 	{
-		enemy->MoveDown();
+		enemy->Update(deltaTime);
 	}
 }
 
@@ -38,7 +37,7 @@ void EnemyController::CreateEnemies(std::vector<EnemyData*> enemiesData)
 {
 	for (auto enemy : enemiesData)
 	{
-		allEnemies.push_back(enemyFactory->CreateEnemy(enemy->enemyType, enemy->spawnTime));
+		allEnemies.push_back(enemyFactory.CreateEnemy(enemy->enemyType, enemy->spawnTime, tileController));
 	}
 }
 
@@ -75,8 +74,14 @@ bool EnemyController::TrySpawnEnemy(EnemyBase& enemy)
 	if (timer >= enemy.GetSpawnTimer() && !enemy.IsSpawned())
 	{
 		TileBase& spawnPoint = tileController.GetRandomSpawnPoint(); 
-		enemy.SpawnEnemy(spawnPoint.GetPositionX(), spawnPoint.GetPositionY());
+		enemy.SetSpawnPoint(spawnPoint);
+
+		TileBase& destinationPoint = tileController.GetRandomPlayerPoint();
+		enemy.SetDestinationPoint(destinationPoint);
+		
+		enemy.SpawnEnemy();
 		std::cout << "Enemy spawned!" << std::endl;
+
 		return true;
 	}
 	return false;

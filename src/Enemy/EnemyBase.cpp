@@ -2,10 +2,13 @@
 
 #include "Enemy/EnemyBase.h"
 
-EnemyBase::EnemyBase(float spawnTimer) :
-    spawnTimer(spawnTimer)
+EnemyBase::EnemyBase(float spawnTimer, TileController& tC) :
+    tileController(tC),
+    spawnTimer(spawnTimer),
+    destinationPoint(nullptr),
+    spawnPoint(nullptr)
 {
-
+    pathFinder = new PathFinding(tileController);
 }
 
 EnemyBase::~EnemyBase()
@@ -13,11 +16,29 @@ EnemyBase::~EnemyBase()
 
 }
 
-void EnemyBase::SpawnEnemy(float posX, float posY)
+void EnemyBase::Update(float deltaTime)
 {
-    positionX = posX;
-    positionY = posY;
+    if (pathFinder->IsPathSearching())
+    {
+        pathFinder->Update(deltaTime);
+    }
+}
+
+void EnemyBase::SpawnEnemy()
+{
+    positionX = spawnPoint->GetPositionX();
+    positionY = spawnPoint->GetPositionY();
     spawned = true;
+}
+
+void EnemyBase::SetDestinationPoint(TileBase& destinationTile)
+{
+    destinationPoint = &destinationTile;
+}
+
+void EnemyBase::SetSpawnPoint(TileBase& spawnTile)
+{
+    spawnPoint = &spawnTile;
 }
 
 bool EnemyBase::IsSpawned() const
@@ -43,6 +64,11 @@ float EnemyBase::GetPositionX()
 float EnemyBase::GetPositionY()
 {
     return positionY;
+}
+
+void EnemyBase::FindPath()
+{
+
 }
 
 void EnemyBase::MoveRight()

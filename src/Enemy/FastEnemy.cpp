@@ -1,8 +1,8 @@
 #pragma once
 #include "Enemy/FastEnemy.h"
 
-FastEnemy::FastEnemy(EnemyData::EnemyType type, float time) :
-	EnemyBase(time)
+FastEnemy::FastEnemy(EnemyData::EnemyType type, float time, TileController& tC) :
+	EnemyBase(time, tC)
 {
 	health = HEALTH;
 	speed = SPEED;

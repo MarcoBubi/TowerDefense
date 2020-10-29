@@ -1,19 +1,20 @@
 #pragma once
 
 #include "Controllers/ProjectileController.h"
+#include "Projectiles/ProjectileBase.h"
 #include <iostream>
 
-ProjectileController::ProjectileController(EnemyController* eC, TileController* tC) :
-	enemyController(*eC),
-	tileController(*tC),
-	projectileFactory(new ProjectileFactory())
+ProjectileController::ProjectileController(EnemyController& eC, TileController& tC, ProjectileFactory& pF) :
+	enemyController(eC),
+	tileController(tC),
+	projectileFactory(pF)
 {
 
 }
 
 ProjectileController::~ProjectileController()
 {
-	projectileFactory = nullptr;
+
 }
 
 void ProjectileController::Start()
@@ -29,7 +30,7 @@ void ProjectileController::Update(float deltaTime)
 
 void ProjectileController::SpawnProjectile(int posX, int posY, float angle)
 {
-	activeProjectiles.push_back(projectileFactory->CreateProjectile());
+	activeProjectiles.push_back(projectileFactory.CreateProjectile());
 }
 
 void ProjectileController::CheckForCollisions()

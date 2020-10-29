@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Data/EnemyData.h"
 #include "Factories/EnemyFactory.h"
 #include "Controllers/ControllerBase.h"
 #include "Controllers/TileController.h"
@@ -9,7 +8,7 @@
 class EnemyController : public ControllerBase
 {
 public:
-	EnemyController(TileController* tC);
+	EnemyController(TileController& tC, EnemyFactory& eF);
 	~EnemyController();
 
 	void Start() override;
@@ -28,7 +27,7 @@ private:
 
 	float timer = 0.0f;
 	TileController& tileController;
-	EnemyFactory* enemyFactory = nullptr;
+	EnemyFactory& enemyFactory;
 	std::vector<EnemyBase*> allEnemies;
 	std::vector<EnemyBase*> availableEnemies;
 	std::vector<EnemyBase*> spawnedEnemies;

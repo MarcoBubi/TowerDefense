@@ -2,10 +2,10 @@
 
 #include "Enemy/SlowEnemy.h"
 
-SlowEnemy::SlowEnemy(EnemyData::EnemyType type, float time) :
-	EnemyBase(time)
+SlowEnemy::SlowEnemy(EnemyData::EnemyType type, float time, TileController& tC) :
+	EnemyBase(time, tC)
 {
-	health = 250.0f;
+	health = HEALTH;
 }
 
 SlowEnemy::~SlowEnemy()

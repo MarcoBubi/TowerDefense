@@ -3,9 +3,9 @@
 #include "Views/EnemyViewController.h"
 #include "Controllers/EnemyController.h"
 
-EnemyViewController::EnemyViewController(SDL_Renderer* renderer, EnemyController* enemyController) :
-	renderer(*renderer),
-	enemyController(*enemyController)
+EnemyViewController::EnemyViewController(SDL_Renderer& rend, EnemyController& enemyController) :
+	renderer(rend),
+	enemyController(enemyController)
 {
 
 }
