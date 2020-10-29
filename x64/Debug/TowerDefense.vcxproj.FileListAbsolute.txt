@@ -1,0 +1,2 @@
+D:\Projects\radionica\TowerDefense\x64\Debug\TowerDefense.exe
+D:\Projects\radionica\TowerDefense\x64\Debug\TowerDefense.pdb

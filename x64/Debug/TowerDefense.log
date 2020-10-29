@@ -1,0 +1,5 @@
+﻿  TowerBase.cpp
+D:\Projects\radionica\TowerDefense\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+D:\Projects\radionica\TowerDefense\src\Tower\TowerBase.cpp(83,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\radionica\TowerDefense\src\Tower\TowerBase.cpp(101,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  TowerDefense.vcxproj -> D:\Projects\radionica\TowerDefense\x64\Debug\TowerDefense.exe
