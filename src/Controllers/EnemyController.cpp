@@ -27,8 +27,14 @@ void EnemyController::Update(float deltaTime)
 {
 	timer += deltaTime;
 	TrySpawnEnemies();
+
 	for (auto& enemy : spawnedEnemies)
 	{
+		if (enemy->IsTargetReached())
+		{
+			DeleteEnemy(enemy);
+			continue;
+		}
 		enemy->Update(deltaTime);
 	}
 }
@@ -74,12 +80,9 @@ bool EnemyController::TrySpawnEnemy(EnemyBase& enemy)
 	if (timer >= enemy.GetSpawnTimer() && !enemy.IsSpawned())
 	{
 		TileBase& spawnPoint = tileController.GetRandomSpawnPoint(); 
-		enemy.SetSpawnPoint(spawnPoint);
-
 		TileBase& destinationPoint = tileController.GetRandomPlayerPoint();
-		enemy.SetDestinationPoint(destinationPoint);
 		
-		enemy.SpawnEnemy();
+		enemy.SpawnEnemy(spawnPoint, destinationPoint);
 		std::cout << "Enemy spawned!" << std::endl;
 
 		return true;
@@ -92,12 +95,12 @@ void EnemyController::GiveDamageToEnemy(float damage, EnemyBase* enemy)
 	enemy->ReceiveDamage(damage);
 }
 
-std::vector<EnemyBase*> EnemyController::GetAllEnemies() const
+const std::vector<EnemyBase*>& EnemyController::GetAllEnemies()
 {
 	return allEnemies;
 }
 
-std::vector<EnemyBase*> EnemyController::GetSpawnedEnemies() const
+const std::vector<EnemyBase*>& EnemyController::GetSpawnedEnemies()
 {
 	return spawnedEnemies;
 }

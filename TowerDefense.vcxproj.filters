@@ -195,6 +195,9 @@
     <ClCompile Include="src\PathFinding\PathNode.cpp">
       <Filter>Source Files\PathFinding</Filter>
     </ClCompile>
+    <ClCompile Include="src\Views\TileViewController.cpp">
+      <Filter>Source Files\Views</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Game.h">
@@ -301,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="include\PathFinding\PathNode.h">
       <Filter>Header Files\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Views\TileViewController.h">
+      <Filter>Header Files\Views</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

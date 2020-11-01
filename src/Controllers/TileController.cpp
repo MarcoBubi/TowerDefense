@@ -9,8 +9,8 @@
 #include <time.h>
 
 TileController::TileController(int screenHeight, int screenWidth, TileFactory& tF) : 
-	horizontalTiles(screenHeight / Constants::TILE_SIZE),
-	verticalTiles(screenWidth / Constants::TILE_SIZE),
+	horizontalTiles(screenWidth / Constants::TILE_SIZE),
+	verticalTiles(screenHeight / Constants::TILE_SIZE),
 	tileFactory(tF)
 {
 	srand(time(NULL)); // Don't feel like implementing a better solution atm.
@@ -54,14 +54,14 @@ void TileController::CreateTiles(std::vector<TileData*> tilesData)
 {
 	int numberOfTiles = horizontalTiles * verticalTiles;
 	int tileIndex = 0;
-	float tileX = Constants::GAME_FIELD_OFFSET_X;
-	float tileY = Constants::GAME_FIELD_OFFSET_Y;
+	float offsetX = Constants::GAME_FIELD_OFFSET_X;
+	float offsetY = Constants::GAME_FIELD_OFFSET_Y;
 
 	for (int vert = 0; vert < verticalTiles; ++vert)
 	{
 		for (int horz = 0; horz < horizontalTiles; ++horz)
 		{
-			TileBase* tile = tileFactory.CreateTile(tilesData[tileIndex]->tileType, tileX, tileY);
+			TileBase* tile = tileFactory.CreateTile(tilesData[tileIndex]->tileType, offsetX, offsetY);
 			tiles[tileIndex] = tile;
 			TileData::TileType tileType = tilesData[tileIndex]->tileType;
 
@@ -76,11 +76,11 @@ void TileController::CreateTiles(std::vector<TileData*> tilesData)
 			}
 
 			++tileIndex;
-			tileX += Constants::TILE_SIZE;
+			offsetX += Constants::TILE_SIZE;
 		}
 
-		tileY += Constants::TILE_SIZE;
-		tileX = Constants::GAME_FIELD_OFFSET_X;
+		offsetY += Constants::TILE_SIZE;
+		offsetX = Constants::GAME_FIELD_OFFSET_X;
 	}
 }
 
@@ -91,10 +91,7 @@ int TileController::GetTilePosition(int position)
 
 TileBase* TileController::GetTileAtPosition(int positionX, int positionY) const
 {
-	int coordinateX = GetCoordinateFor(positionX, Constants::GAME_FIELD_OFFSET_X);
-	int coordinateY = GetCoordinateFor(positionY, Constants::GAME_FIELD_OFFSET_Y);
-
-	return GetTileAtIndex(GetTileIndexForPosition(coordinateX, coordinateY));
+	return GetTileAtIndex(GetTileIndexForPosition(positionX, positionY));
 }
 
 TileBase* TileController::GetTileAtIndex(int index) const

@@ -13,7 +13,8 @@ public:
 	{
 		Idle = 0,
 		Searching = 1,
-		Found = 2
+		Found = 2,
+		Reached = 3
 	};
 
 	PathFinding(TileController& tC);
@@ -21,18 +22,22 @@ public:
 
 	void Update(float deltaTime);
 
+	PathNode* GetNodeAtIndex(int index);
 	void FindPath(TileBase* currentTile, TileBase* targetTile);
 	bool IsPathSearching();
+	bool IsPathFound();
+	bool IsPathReached();
+	void Reset();
 
 private:
 	void ClearAllPaths();
-	void ClearPath(std::vector<PathNode*> targetPath);
-	void AddNodeToPath(std::vector<PathNode*> targetPath, PathNode* targetTile);
-	void SortPath(std::vector<PathNode*> targetPath);
-	PathNode* GetNodeInPath(std::vector<PathNode*> targetPath, TileBase* tile);
+	void ClearPath(std::vector<PathNode*>& targetPath);
+	void AddNodeToPath(std::vector<PathNode*>& targetPath, PathNode* targetTile);
+	void SortPath(std::vector<PathNode*>& targetPath);
+	PathNode* GetNodeInPath(std::vector<PathNode*>& targetPath, TileBase* tile);
 
-	void AddTile(std::vector<TileBase*>& surroundingTiles, TileBase* currentTile, int surroundingX, int surroundingY);
-	void BuildTargetPath(PathNode* node);
+	void AddTile(std::vector<TileBase*>& targetPath, TileBase* currentTile, int surroundingX, int surroundingY);
+	void BuildPath(PathNode* node);
 
 	int GetDistance(TileBase* tile, TileBase* destinationTile);
 
@@ -43,6 +48,6 @@ private:
 	PathFindingState state = PathFindingState::Idle;
 	std::vector<PathNode* > openPath;
 	std::vector<PathNode* > closedPath;
-	std::vector<PathNode* > targetPath;
+	std::vector<PathNode* > finalPath;
 
 };

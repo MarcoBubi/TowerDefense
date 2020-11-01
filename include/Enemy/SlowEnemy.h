@@ -12,5 +12,5 @@ public:
 
 private:
 	const int HEALTH = 300;
-	const int SPEED = 1;
+	const int SPEED = 0.6;
 };

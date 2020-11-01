@@ -11,11 +11,12 @@ public:
 
 	void Update(float deltaTime);
 
-	void SpawnEnemy();
+	void SpawnEnemy(TileBase& spawnTile, TileBase& destinationTile);
 	void SetDestinationPoint(TileBase& destinationTile);
 	void SetSpawnPoint(TileBase& spawnTile);
 
 	bool IsSpawned() const;
+	bool IsTargetReached();
 	float GetSpawnTimer() const;
 
 	float GetHealth();
@@ -25,22 +26,21 @@ public:
 	void ReceiveDamage(float damage);
 
 protected:
-	void FindPath();
-
-	void MoveRight();
-	void MoveLeft();
-	void MoveUp();
-	void MoveDown();
+	void MoveToTarget(int targetX, int targetY);
+	void MoveToTargetHorizontally(int targetX);
+	void MoveToTargetVertically(int targetY);
 
 	bool spawned = false;
-	float positionX = 50; // spawn point X
-	float positionY = 50; // spawn point Y
+	int enemyNodeIndex = -1; // starting value for pathfinding
+	float positionX = 0.0f; 
+	float positionY = 0.0f; 
 	float spawnTimer = 0.0f;
 	float health = 100.0f;
-	float speed = 1.0f;
+	float speed = 0.6f;
 
 	PathFinding* pathFinder;
 	TileController& tileController;
 	TileBase* destinationPoint;
 	TileBase* spawnPoint;
+	TileBase* currentPoint;
 };

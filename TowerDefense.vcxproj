@@ -187,6 +187,7 @@
     <ClCompile Include="src\Tower\TowerBase.cpp" />
     <ClCompile Include="src\Views\EnemyView.cpp" />
     <ClCompile Include="src\Views\EnemyViewController.cpp" />
+    <ClCompile Include="src\Views\TileViewController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Constants\Constants.h" />
@@ -224,6 +225,7 @@
     <ClInclude Include="include\Tower\TowerBase.h" />
     <ClInclude Include="include\Views\EnemyView.h" />
     <ClInclude Include="include\Views\EnemyViewController.h" />
+    <ClInclude Include="include\Views\TileViewController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

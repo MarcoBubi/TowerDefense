@@ -19,8 +19,8 @@ public:
 	bool TrySpawnEnemy(EnemyBase& enemy);
 	void GiveDamageToEnemy(float damage, EnemyBase* enemy);
 
-	std::vector<EnemyBase*> GetAllEnemies() const;
-	std::vector<EnemyBase*> GetSpawnedEnemies() const;
+	const std::vector<EnemyBase*>& GetAllEnemies();
+	const std::vector<EnemyBase*>& GetSpawnedEnemies();
 
 private:
 	void DeleteEnemy(EnemyBase* enemy);

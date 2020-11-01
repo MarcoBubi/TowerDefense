@@ -3,6 +3,7 @@
 #include "PathFinding/PathFinding.h"
 #include "PathFinding/PathNode.h"
 #include "Tiles/TileBase.h"
+#include "Constants/Constants.h"
 #include <stdlib.h>
 #include <algorithm>
 #include <math.h>
@@ -35,7 +36,7 @@ void PathFinding::Update(float deltaTime)
 		
 		if (currentNodeIndex == destinationTileIndex)
 		{
-			BuildTargetPath(currentNode);
+			BuildPath(currentNode);
 
 			state = PathFindingState::Found;
 			return;
@@ -52,7 +53,7 @@ void PathFinding::Update(float deltaTime)
 		{
 			TileBase* tile = surroundingTiles.at(i);
 
-			if (GetNodeInPath(closedPath, tile) == nullptr)
+			if (GetNodeInPath(closedPath, tile) != nullptr)
 			{
 				continue;
 			}
@@ -86,6 +87,16 @@ void PathFinding::Update(float deltaTime)
 	}
 }
 
+PathNode* PathFinding::GetNodeAtIndex(int index)
+{
+	if (index >= 0 && index < finalPath.size())
+	{
+		return finalPath.at(index);
+	}
+
+	return nullptr;
+}
+
 void PathFinding::FindPath(TileBase* currentTile, TileBase* targetTile)
 {
 	if (state != PathFindingState::Idle)
@@ -109,26 +120,45 @@ void PathFinding::FindPath(TileBase* currentTile, TileBase* targetTile)
 
 	if (currentTileIndex == destinationTileIndex || !targetTile->IsPassable())
 	{
+		state = Reached;
 		return; 
 	}
 
 	PathNode* node = new PathNode(currentTile);
 	AddNodeToPath(openPath, node);
+
+	state = PathFindingState::Searching;
 }
 
 bool PathFinding::IsPathSearching()
 {
-	return state == PathFinding::PathFindingState::Searching;
+	return state == PathFindingState::Searching;
+}
+
+bool PathFinding::IsPathFound()
+{
+	return state == PathFindingState::Found;
+}
+
+bool PathFinding::IsPathReached()
+{
+	return state == PathFinding::Reached;
+}
+
+void PathFinding::Reset()
+{
+	state = PathFindingState::Idle;
 }
 
 void PathFinding::ClearAllPaths()
 {
 	ClearPath(openPath);
 	ClearPath(closedPath);
-	targetPath.clear(); //should be empty by now
+	finalPath.clear(); //should be empty by now
+	destinationTileIndex = -1; // reset
 }
 
-void PathFinding::ClearPath(std::vector<PathNode*> targetPath)
+void PathFinding::ClearPath(std::vector<PathNode*>& targetPath)
 {
 	while (targetPath.size() > 0)
 	{
@@ -139,24 +169,25 @@ void PathFinding::ClearPath(std::vector<PathNode*> targetPath)
 	}
 }
 
-void PathFinding::AddNodeToPath(std::vector<PathNode*> targetPath, PathNode* targetTile)
+void PathFinding::AddNodeToPath(std::vector<PathNode*>& targetPath, PathNode* targetTile)
 {
 	targetPath.push_back(targetTile);
 	SortPath(targetPath);
 }
 
-void PathFinding::SortPath(std::vector<PathNode*> targetPath)
+void PathFinding::SortPath(std::vector<PathNode*>& targetPath)
 {
 	std::sort(targetPath.begin(), targetPath.end(), PathNode::ComparePathNodes);
 }
 
-PathNode* PathFinding::GetNodeInPath(std::vector<PathNode*> targetPath, TileBase* tile)
+PathNode* PathFinding::GetNodeInPath(std::vector<PathNode*>& targetPath, TileBase* tile)
 {
 	int index = tileController.GetIndexForTile(tile);
 	for (int i = 0; i < targetPath.size(); ++i)
 	{
-		PathNode* node = openPath.at(i);
-		if (tileController.GetIndexForTile(node->GetTile()) == index)
+		PathNode* node = targetPath.at(i);
+		int tileIndex = tileController.GetIndexForTile(node->GetTile());
+		if (tileIndex == index)
 		{
 			return node;
 		}
@@ -164,25 +195,31 @@ PathNode* PathFinding::GetNodeInPath(std::vector<PathNode*> targetPath, TileBase
 	return nullptr;
 }
 
-void PathFinding::AddTile(std::vector<TileBase*>& surroundingTiles, TileBase* currentTile, int surroundingX, int surroundingY)
+void PathFinding::AddTile(std::vector<TileBase*>& targetPath, TileBase* currentTile, int surroundingX, int surroundingY)
 {
-	int x = tileController.GetTilePosition(currentTile->GetPositionX() + surroundingX);
-	int y = tileController.GetTilePosition(currentTile->GetPositionY() + surroundingY);
+	int x = tileController.GetTilePosition(currentTile->GetPositionX() - Constants::GAME_FIELD_OFFSET_X) + surroundingX;
+	int y = tileController.GetTilePosition(currentTile->GetPositionY() - Constants::GAME_FIELD_OFFSET_Y) + surroundingY;
 
 	TileBase* tile = tileController.GetTileAtPosition(x, y);
-	if (tile != nullptr && tile->IsPassable() && !tileController.IsPositionOutOfBound(x, y))
+
+	if (tile != nullptr)
 	{
-		surroundingTiles.push_back(tile);
+		bool positionOutOfBound = tileController.IsPositionOutOfBound(x, y);
+
+		if (tile->IsPassable() && !positionOutOfBound)
+		{
+			targetPath.push_back(tile);
+		}
 	}
 }
 
-void PathFinding::BuildTargetPath(PathNode* node)
+void PathFinding::BuildPath(PathNode* node)
 {
 	do
 	{
 		if (node->GetParentNode() != nullptr)
 		{
-			targetPath.insert(targetPath.begin(), node);
+			finalPath.insert(finalPath.begin(), node);
 		}
 
 		node->GetTile()->SetPath(true);

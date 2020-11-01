@@ -21,10 +21,10 @@ bool EnemyView::CanDraw()
 
 void EnemyView::Draw()
 {
-	drawn = true;
 	img = IMG_LoadTexture(&renderer, IMG_PATH);
 	if (img != nullptr)
 	{
+		drawn = true;
 		SDL_QueryTexture(img, NULL, NULL, &w, &h);
 		SDL_Rect texr;
 		texr.x = enemy.GetPositionX();
