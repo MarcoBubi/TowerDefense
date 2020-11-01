@@ -2,3 +2,9 @@
 /x64
 
 *.obj
+*.exe
+*.ilk
+*.log
+*.tlog
+*.idb
+*.pdb
