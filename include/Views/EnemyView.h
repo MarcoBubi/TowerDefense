@@ -9,7 +9,7 @@
 class EnemyView
 {
 public:
-	explicit EnemyView(SDL_Renderer* renderer, EnemyBase* enemy);
+	explicit EnemyView(SDL_Renderer& renderer, EnemyBase& enemy);
 	~EnemyView();
 
 	bool CanDraw();

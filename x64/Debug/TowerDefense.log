@@ -1,5 +1,77 @@
-﻿  EnemyController.cpp
+﻿  Constants.cpp
+C:\Users\Marco\Desktop\TD\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  ControllerBase.cpp
+  EnemyController.cpp
+  GameController.cpp
+C:\Users\Marco\Desktop\TD\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  ProjectileController.cpp
+  TileController.cpp
+C:\Users\Marco\Desktop\TD\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+C:\Users\Marco\Desktop\TD\src\Controllers\TileController.cpp(16,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Controllers\TileController.cpp(136,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Controllers\TileController.cpp(145,43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  TowerController.cpp
+C:\Users\Marco\Desktop\TD\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  ViewController.cpp
+C:\Users\Marco\Desktop\TD\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  EnemyData.cpp
+  PlayerData.cpp
+  TileData.cpp
+  EnemyBase.cpp
+C:\Users\Marco\Desktop\TD\src\Enemy\EnemyBase.cpp(39,27): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Enemy\EnemyBase.cpp(40,27): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Enemy\EnemyBase.cpp(41,35): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Enemy\EnemyBase.cpp(41,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Enemy\EnemyBase.cpp(64,39): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Enemy\EnemyBase.cpp(65,39): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  FastEnemy.cpp
+C:\Users\Marco\Desktop\TD\include\Enemy\FastEnemy.h(15,20): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Enemy\FastEnemy.cpp(7,11): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Enemy\FastEnemy.cpp(8,10): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  SlowEnemy.cpp
+C:\Users\Marco\Desktop\TD\include\Enemy\SlowEnemy.h(15,20): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Enemy\SlowEnemy.cpp(8,11): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+  EnemyFactory.cpp
+C:\Users\Marco\Desktop\TD\include\Enemy\FastEnemy.h(15,20): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+C:\Users\Marco\Desktop\TD\include\Enemy\SlowEnemy.h(15,20): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  ProjectileFactory.cpp
+  TileFactory.cpp
+  TowerFactory.cpp
+C:\Users\Marco\Desktop\TD\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  Game.cpp
+C:\Users\Marco\Desktop\TD\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  DataLoader.cpp
+  Generating Code...
+  Compiling...
   main.cpp
 C:\Users\Marco\Desktop\TD\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  PathFinding.cpp
+C:\Users\Marco\Desktop\TD\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  PathNode.cpp
+  Player.cpp
+  NormalProjectile.cpp
+  ProjectileBase.cpp
+C:\Users\Marco\Desktop\TD\src\Projectiles\ProjectileBase.cpp(18,49): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Projectiles\ProjectileBase.cpp(19,49): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+  ImpassableTile.cpp
+  PassableTile.cpp
+  PlayerPointTile.cpp
+  SpawnPointTile.cpp
+  TileBase.cpp
+C:\Users\Marco\Desktop\TD\src\Tiles\TileBase.cpp(6,11): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Tiles\TileBase.cpp(7,11): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  FastTower.cpp
+C:\Users\Marco\Desktop\TD\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  SlowTower.cpp
+C:\Users\Marco\Desktop\TD\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  TowerBase.cpp
+C:\Users\Marco\Desktop\TD\include\Constants\Constants.h(17,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+C:\Users\Marco\Desktop\TD\src\Tower\TowerBase.cpp(83,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Tower\TowerBase.cpp(101,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  EnemyView.cpp
+C:\Users\Marco\Desktop\TD\src\Views\EnemyView.cpp(30,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Marco\Desktop\TD\src\Views\EnemyView.cpp(31,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  EnemyViewController.cpp
+  TileViewController.cpp
   Generating Code...
   TowerDefense.vcxproj -> C:\Users\Marco\Desktop\TD\x64\Debug\TowerDefense.exe

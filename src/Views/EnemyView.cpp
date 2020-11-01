@@ -2,9 +2,9 @@
 
 #include "Views/EnemyView.h"
 
-EnemyView::EnemyView(SDL_Renderer* renderer, EnemyBase* enemy) : // CREATE AN ENEMY VIEW BASE FOR THIS ALSO, TESTING PURPOSE FOR THE VIEW ONLY
-	renderer(*renderer),
-	enemy(*enemy)
+EnemyView::EnemyView(SDL_Renderer& renderer, EnemyBase& enemy) : // CREATE AN ENEMY VIEW BASE FOR THIS ALSO, TESTING PURPOSE FOR THE VIEW ONLY
+	renderer(renderer),
+	enemy(enemy)
 {
 	
 }

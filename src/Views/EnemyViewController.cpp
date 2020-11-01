@@ -19,7 +19,7 @@ void EnemyViewController::Start()
 {
 	for (auto& enemy : enemyController.GetAllEnemies())
 	{
-		allEnemies.push_back(new EnemyView(&renderer, enemy));
+		allEnemies.push_back(new EnemyView(renderer, *enemy));
 	}
 }
 
