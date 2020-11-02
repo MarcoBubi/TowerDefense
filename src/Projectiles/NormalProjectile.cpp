@@ -3,8 +3,8 @@
 #include "Projectiles/ProjectileBase.h"
 #include "Projectiles/NormalProjectile.h"
 
-NormalProjectile::NormalProjectile() :
-	ProjectileBase()
+NormalProjectile::NormalProjectile(int posX, int posY, int xTarget, int yTarget) :
+	ProjectileBase(posX, posY, xTarget, yTarget)
 {
 
 }

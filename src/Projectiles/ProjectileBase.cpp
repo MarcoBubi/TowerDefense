@@ -1,11 +1,16 @@
 #pragma once
 
 #include "Projectiles/ProjectileBase.h"
-#include <math.h>
+#include "Constants/Constants.h"
 
-ProjectileBase::ProjectileBase()
+ProjectileBase::ProjectileBase(int x, int y, int targetX, int targetY) :
+    positionX(x),
+    positionY(y),
+    targetX(targetX),
+    targetY(targetY)
 {
-
+    SetAngle();
+    CalculateMovement();
 }
 
 ProjectileBase::~ProjectileBase()
@@ -15,8 +20,8 @@ ProjectileBase::~ProjectileBase()
 
 void ProjectileBase::Update(float deltaTime)
 {
-    positionX += speed * cosf(angle) * deltaTime;
-    positionY += speed * sinf(angle) * deltaTime;
+    positionX += movementX;
+    positionY += movementY;
 }
 
 float ProjectileBase::GetProjectileDamage() const
@@ -42,4 +47,33 @@ float ProjectileBase::GetSpeed() const
 float ProjectileBase::GetAngle() const
 {
     return angle;
+}
+
+void ProjectileBase::SetAngle()
+{
+    float pathX = targetX - positionX;
+    float pathY = targetY - positionY;
+    float angleDegree = atan2f(pathY, pathX) * 180 / Constants::PI;
+    angle = angleDegree * (Constants::PI / 180.0f);
+}
+
+void ProjectileBase::CalculateMovement()
+{
+    if (targetX > positionX)
+    {
+        movementX = speed * cosf(angle);
+    }
+    else
+    {
+        movementX = speed * cosf(angle);
+    }
+
+    if (targetY > positionY)
+    {
+        movementY = speed * sinf(angle);
+    }
+    else if (targetY < positionY)
+    {
+        movementY = speed * sinf(angle);
+    }
 }

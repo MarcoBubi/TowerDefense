@@ -1,12 +1,14 @@
 #pragma once
 
 #include "Enemy/EnemyBase.h"
+#include "Drawable.h"
 #include <SDL.h>
 #include <SDL_image.h>
 
-#define IMG_PATH "resources/enemy_1.png"
+#define IMG_PATH_E1 "resources/enemy_1.png"
+#define IMG_PATH_E2 "resources/enemy_2.png" // this will be in it's own enemy view
 
-class EnemyView
+class EnemyView : public Drawable
 {
 public:
 	explicit EnemyView(SDL_Renderer& renderer, EnemyBase& enemy);
@@ -16,13 +18,5 @@ public:
 	void Draw();
 
 private:
-	SDL_Renderer& renderer;
-	SDL_Texture* img = nullptr;
-	int x = 100;
-	int y = 100;
-	int w = 50;
-	int h = 50;
-	bool drawn = false;
 	EnemyBase& enemy;
-
 };

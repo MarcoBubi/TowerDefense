@@ -5,7 +5,7 @@
 class NormalProjectile : public ProjectileBase
 {
 public:
-	NormalProjectile();
+	NormalProjectile(int posX, int posY, int xTarget, int yTarget);
 	~NormalProjectile();
 
 };

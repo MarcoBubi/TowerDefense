@@ -20,10 +20,12 @@ public:
 	float GetSpawnTimer() const;
 
 	float GetHealth();
-	float GetPositionX();
-	float GetPositionY();
+	float GetPositionX() const;
+	float GetPositionY() const;
 
 	void ReceiveDamage(float damage);
+	int GetDeathValue() const;
+	int GetDamageValue() const;
 
 protected:
 	void MoveToTarget(int targetX, int targetY);
@@ -37,6 +39,9 @@ protected:
 	float spawnTimer = 0.0f;
 	float health = 100.0f;
 	float speed = 0.6f;
+
+	int damageValue = 30; // load this from somewhere
+	int deathValue = 50; //load this from somewhere
 
 	PathFinding* pathFinder;
 	TileController& tileController;

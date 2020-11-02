@@ -116,14 +116,24 @@ int TileController::GetIndexForPosition(int x, int y) const
 	return GetTileIndexForPosition(coordinateX, coordinateY);
 }
 
-bool TileController::IsPositionOutOfBound(int positionX, int positionY) const
+bool TileController::IsPositionOutOfBound(int coordinateX, int coordinateY) const
 {
-	return GetTileAtPosition(positionX, positionY) == nullptr;
+	return GetTileAtPosition(coordinateX, coordinateY) == nullptr;
 }
 
 int TileController::GetNumberOfTiles() const
 {
 	return horizontalTiles * verticalTiles;;
+}
+
+int TileController::GetNumberOfHTiles() const
+{
+	return horizontalTiles;
+}
+
+int TileController::GetNumberOfVTiles() const
+{
+	return verticalTiles;
 }
 
 std::vector<TileBase*> TileController::GetSpawnPoints() const
@@ -154,9 +164,14 @@ std::vector<TileBase*> TileController::GetPlayerPoints() const
 	return playerPoints;
 }
 
+TileBase** TileController::GetTiles()
+{
+	return tiles;
+}
+
 int TileController::GetCoordinateFor(int value, int offSet) const
 {
-	return  (offSet + value) / Constants::TILE_SIZE;
+	return  (value - offSet) / Constants::TILE_SIZE;
 }
 
 int TileController::GetTileIndexForPosition(int x, int y) const

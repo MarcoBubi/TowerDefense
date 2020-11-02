@@ -3,7 +3,7 @@
 #include "Factories/ProjectileFactory.h"
 #include "Projectiles/NormalProjectile.h"
 
-ProjectileBase* ProjectileFactory::CreateProjectile()
+ProjectileBase* ProjectileFactory::CreateProjectile(int posX, int posY, int targetX, int targetY)
 {
-    return new NormalProjectile();
+    return new NormalProjectile(posX, posY, targetX, targetY);
 }

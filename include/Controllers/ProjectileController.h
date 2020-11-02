@@ -4,6 +4,7 @@
 #include "Controllers/ControllerBase.h"
 #include "Controllers/EnemyController.h"
 #include "Controllers/TileController.h"
+#include "Player/Player.h"
 #include <vector>
 
 class ProjectileBase;
@@ -11,13 +12,14 @@ class ProjectileBase;
 class ProjectileController : public ControllerBase
 {
 public:
-	explicit ProjectileController(EnemyController& eC, TileController& tC, ProjectileFactory& pF);
+	explicit ProjectileController(EnemyController& eC, TileController& tC, ProjectileFactory& pF, Player& player);
 	~ProjectileController();
 
 	void Start() override;
 	void Update(float deltaTime) override;
 
-	void SpawnProjectile(int posX, int posY, float angle);
+	void SpawnProjectile(int posX, int posY, EnemyBase& enemy);
+	const std::vector<ProjectileBase*>& GetActiveProjectiles();
 	
 private:
 	void CheckForCollisions();
@@ -28,5 +30,6 @@ private:
 	EnemyController& enemyController;
 	TileController& tileController;
 	ProjectileFactory& projectileFactory;
+	Player& player;
 	std::vector<ProjectileBase*> activeProjectiles;
 };

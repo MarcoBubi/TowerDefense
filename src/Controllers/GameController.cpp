@@ -6,6 +6,7 @@
 #include "Factories/TileFactory.h"
 #include "Factories/TowerFactory.h"
 #include "SDL.h"
+#include <iostream>
 
 GameController::GameController(int screenHeight, int screenWidth) :
 	screenH(screenHeight),
@@ -14,9 +15,11 @@ GameController::GameController(int screenHeight, int screenWidth) :
 {
 	InitFactories();
 
+	dataLoader->LoadData();
+	player = new Player(*dataLoader->GetPlayerData());
 	tileController = new TileController(screenH, screenW, *tileFactory);
-	enemyController = new EnemyController(*tileController, *enemyFactory);
-	projectileController = new ProjectileController(*enemyController, *tileController, *projectileFactory);
+	enemyController = new EnemyController(*tileController, *enemyFactory, *player);
+	projectileController = new ProjectileController(*enemyController, *tileController, *projectileFactory, *player);
 	towerController = new TowerController(*enemyController, *projectileController, *tileController, *towerFactory);
 }
 
@@ -26,19 +29,31 @@ GameController::~GameController()
 	delete enemyController;
 	delete towerController;
 	delete tileController;
+
+	delete enemyFactory;
+	delete projectileFactory;
+	delete tileFactory;
+	delete towerFactory;
+	delete player;
+
 	delete dataLoader;
 
 	projectileController = nullptr;
 	enemyController = nullptr;
 	towerController = nullptr;
 	tileController = nullptr;
+
+	enemyFactory = nullptr;
+	projectileFactory = nullptr;
+	tileFactory = nullptr;
+	towerFactory = nullptr;
+	player = nullptr;
+
 	dataLoader = nullptr;
 }
 
 void GameController::Start()
 {
-	dataLoader->LoadData();
-	player = new Player(*dataLoader->GetPlayerData());
 	tileController->Start();
 	tileController->CreateTiles(dataLoader->GetTileData());
 	enemyController->CreateEnemies(dataLoader->GetEnemyData());
@@ -51,6 +66,10 @@ void GameController::Update(float deltaTime)
 	enemyController->Update(deltaTime);
 	projectileController->Update(deltaTime);
 	towerController->Update(deltaTime);
+	if (!player->IsAlive())
+	{
+		EndOfGameReached();
+	}
 }
 
 ProjectileController& GameController::GetProjectileController()
@@ -105,6 +124,7 @@ void GameController::InitFactories()
 
 bool GameController::EndOfGameReached()
 {
-	// todo
+	// not sure how I want to end the game yet, so I'll leave empty
+	std::cout << "End of game reached!" << std::endl;
 	return false;
 }

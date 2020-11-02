@@ -5,10 +5,11 @@
 class Player
 {
 public:
-	Player(int startingHealth, int startingCurrency);
 	Player(PlayerData& pD);
 
 	bool HasEnoughCurrency(int targetCurrency);
+
+	void GetCurrency(int value);
 	void DamagePlayer(int damage);
 	bool IsAlive();
 

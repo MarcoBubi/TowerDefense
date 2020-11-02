@@ -35,9 +35,11 @@ void TowerController::Update(float deltaTime)
 
 void TowerController::TryAddTower(int posX, int posY)
 {
-	if (CanSpawnOnTargetLocation(posX, posY))
+	int x = posX;
+	int y = posY;
+	if (CanSpawnOnTargetLocation(x, y))
 	{
-		activeTowers.push_back(towerFactory.CreateTower(selectedTower, &enemyController, &projectileController, posX, posY));
+		activeTowers.push_back(towerFactory.CreateTower(selectedTower, &enemyController, &projectileController, x, y));
 	}	
 }
 
@@ -51,10 +53,24 @@ int TowerController::GetTowerPrice()
 	return 50; // hardcoded just for testing purpose, will find a better way later
 }
 
-bool TowerController::CanSpawnOnTargetLocation(int positionX, int positionY)
+std::vector<TowerBase*>& TowerController::GetActiveTowers()
 {
-	TileBase& targetTile = *tileController.GetTileAtPosition(positionX, positionY);
+	return activeTowers;
+}
 
-	return !targetTile.IsPassable();
+bool TowerController::CanSpawnOnTargetLocation(int& positionX, int& positionY)
+{
+	int index = tileController.GetIndexForPosition(positionX, positionY);
+	TileBase* targetTile = tileController.GetTileAtIndex(index);
+
+	if (targetTile == nullptr)
+	{
+		return false;
+	}
+
+	positionY = targetTile->GetPositionY();
+	positionX = targetTile->GetPositionX();
+
+	return !targetTile->IsPassable();
 }
 

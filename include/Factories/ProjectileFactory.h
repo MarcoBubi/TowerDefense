@@ -5,6 +5,6 @@
 class ProjectileFactory
 {
 public:
-	ProjectileBase* CreateProjectile();
+	ProjectileBase* CreateProjectile(int posX, int posY, int targetX, int targetY);
 
 };

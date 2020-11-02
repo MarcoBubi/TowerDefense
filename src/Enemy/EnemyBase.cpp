@@ -15,7 +15,12 @@ EnemyBase::EnemyBase(float spawnTimer, TileController& tC) :
 
 EnemyBase::~EnemyBase()
 {
-
+    delete destinationPoint;
+    destinationPoint = nullptr;
+    delete spawnPoint;
+    spawnPoint = nullptr;
+    delete currentPoint;
+    currentPoint = nullptr;
 }
 
 void EnemyBase::Update(float deltaTime)
@@ -97,12 +102,12 @@ float EnemyBase::GetHealth()
     return health;
 }
 
-float EnemyBase::GetPositionX()
+float EnemyBase::GetPositionX() const
 {
     return positionX;
 }
 
-float EnemyBase::GetPositionY()
+float EnemyBase::GetPositionY() const
 {
     return positionY;
 }
@@ -110,6 +115,16 @@ float EnemyBase::GetPositionY()
 void EnemyBase::ReceiveDamage(float damage)
 {
     health -= damage;
+}
+
+int EnemyBase::GetDeathValue() const
+{
+    return deathValue;
+}
+
+int EnemyBase::GetDamageValue() const
+{
+    return damageValue;
 }
 
 void EnemyBase::MoveToTarget(int targetX, int targetY)

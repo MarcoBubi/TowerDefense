@@ -5,9 +5,10 @@
 #include "Enemy/EnemyBase.h"
 #include <iostream>
 
-EnemyController::EnemyController(TileController& tC, EnemyFactory& eF) :
+EnemyController::EnemyController(TileController& tC, EnemyFactory& eF, Player& player) :
 	tileController(tC),
-	enemyFactory(eF)
+	enemyFactory(eF),
+	player(player)
 {
 
 }
@@ -33,6 +34,14 @@ void EnemyController::Update(float deltaTime)
 		if (enemy->IsTargetReached())
 		{
 			DeleteEnemy(enemy);
+			player.DamagePlayer(enemy->GetDamageValue());
+			continue;
+		}
+		
+		if (enemy->GetHealth() < 0.0f)
+		{
+			DeleteEnemy(enemy);
+			player.GetCurrency(enemy->GetDeathValue());
 			continue;
 		}
 		enemy->Update(deltaTime);

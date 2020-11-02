@@ -37,7 +37,7 @@ protected:
 	int positionY = 0;
 	float towerRange = 5 * Constants::TILE_SIZE;
 	float shootCooldown = 5.0f;
-	float shootTimer = 0.0f;
+	float shootTime = 5.0f;
 	float turretAngle = 0.0f;
 	int towerPrice = 50;
 };

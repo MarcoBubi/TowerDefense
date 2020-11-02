@@ -13,25 +13,31 @@ TowerBase::TowerBase(EnemyController* eC, ProjectileController* pC, int x, int y
 
 TowerBase::~TowerBase()
 {
-
+	delete targetEnemy;
+	targetEnemy = nullptr;
 }
 
 void TowerBase::TryShoot(float deltaTime)
 {
 	shootCooldown -= deltaTime;
-	if(targetEnemy != nullptr && IsTargetInRange(targetEnemy))
+	if(targetEnemy != nullptr)
 	{
-		if (IsFacingTarget(targetEnemy))
+		bool targetInRange = IsTargetInRange(targetEnemy);
+		if (targetInRange)
 		{
-			if (shootCooldown <= 0.0f) // <= because of float
+			if (IsFacingTarget(targetEnemy))
 			{
-				Shoot();
+				if (shootCooldown <= 0.0f) // <= because of float
+				{
+					Shoot();
+				}
+			}
+			else
+			{
+				RotateTowardsTarget(targetEnemy);
 			}
 		}
-		else
-		{
-			RotateTowardsTarget(targetEnemy);
-		}
+
 	}
 	else
 	{
@@ -46,8 +52,8 @@ void TowerBase::TryShoot(float deltaTime)
 
 void TowerBase::Shoot()
 {
-	shootCooldown = shootTimer;
-	projectileController.SpawnProjectile(positionX, positionY, turretAngle); // perhaps I need the target enemy here? just for reference...
+	shootCooldown = shootTime;
+	projectileController.SpawnProjectile(positionX, positionY, *targetEnemy); 
 }
 
 int TowerBase::GetPositionX() const
@@ -87,7 +93,6 @@ bool TowerBase::IsTargetInRange(EnemyBase* enemy)
 			targetEnemy = enemy;
 			return true;
 		}
-
 	}
 
 	return false;

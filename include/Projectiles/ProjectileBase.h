@@ -3,7 +3,7 @@
 class ProjectileBase
 {
 public:
-	ProjectileBase();
+	ProjectileBase(int x, int y, int targetX, int targetY);
 	virtual ~ProjectileBase();
 
 	void Update(float deltaTime);
@@ -14,10 +14,17 @@ public:
 	float GetSpeed() const;
 	float GetAngle() const;
 
-private:
-	int positionX = 0;
-	int positionY = 0;
-	float speed = 3.0f;
+protected:
+	void SetAngle();
+	void CalculateMovement();
+
+	float positionX = 0.0f; // setting this 2 values to float for a smoother movement
+	float positionY = 0.0f;
+	float movementX = 0.0f;
+	float movementY = 0.0f;
+	int targetX = 0;
+	int targetY = 0;
+	float speed = 4.0f;
 	float damage = 50.0f;
 	float angle = 0.0f; // maybe I don't need this, we'll see in the view part.
 };

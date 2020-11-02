@@ -20,13 +20,16 @@ public:
 	TileBase* GetTileAtIndex(int index) const;
 	int GetIndexForTile(TileBase* tile) const;
 	int GetIndexForPosition(int x, int y) const;
-	bool IsPositionOutOfBound(int positionX, int positionY) const;
+	bool IsPositionOutOfBound(int coordinateX, int coordinateY) const;
 
 	int GetNumberOfTiles() const;
+	int GetNumberOfHTiles() const;
+	int GetNumberOfVTiles() const;
 	std::vector<TileBase*> GetSpawnPoints() const;
 	TileBase& GetRandomSpawnPoint();
 	TileBase& GetRandomPlayerPoint();
 	std::vector<TileBase*> GetPlayerPoints() const;
+	TileBase** GetTiles();
 
 private:
 	int GetCoordinateFor(int value, int offSet) const;

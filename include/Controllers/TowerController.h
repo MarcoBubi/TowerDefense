@@ -21,8 +21,10 @@ public:
 	void SelectTower(TowerBase::TowerType type);
 	int GetTowerPrice();
 
+	std::vector<TowerBase*>& GetActiveTowers();
+
 private:
-	bool CanSpawnOnTargetLocation(int positionX, int positionY);
+	bool CanSpawnOnTargetLocation(int& positionX, int& positionY);
 
 	TileController& tileController;
 	EnemyController& enemyController;
